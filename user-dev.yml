@@ -1,0 +1,32 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /demo
+spring: #服務名稱
+  application:
+    name: microservice-user
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3308/springcloud?characterEncoding=UTF-8
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+  thymeleaf:
+    mode: HTML5
+    cache: false
+    suffix: .html
+    prefix: classpath:/templates/
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url: #客戶端服務地址
+      defaultZone: http://127.0.0.1:8888/eureka,http://127.0.0.1:9999/eureka
+  instance:
+    prefer-ip-address: true # 優先使用該服務的 IP 地址註冊到 Eureka，在生產環境建議改為 true
+    lease-renewal-interval-in-seconds: 20 #服務續約間隔時間，默認30秒
+    lease-expiration-duration-in-seconds: 60 #服務失效時間，默認90秒，必定要超過renewal時間間隔
